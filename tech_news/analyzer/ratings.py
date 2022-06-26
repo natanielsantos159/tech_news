@@ -25,4 +25,18 @@ def top_5_news():
 
 # Requisito 11
 def top_5_categories():
-    """Seu código deve vir aqui"""
+    news_list = find_news()
+    categories_list = list(map(lambda news: news["category"], news_list))
+
+    categories_count = []
+    for category in categories_list:
+        if category not in map(
+            lambda category: category["name"], categories_count
+        ):
+            categories_count.append(
+                {"name": category, "count": categories_list.count(category)}
+            )
+
+    categories_count.sort(key=lambda category: category["count"], reverse=True)
+    top_5 = [category["name"] for category in categories_count[:5]]
+    return top_5
