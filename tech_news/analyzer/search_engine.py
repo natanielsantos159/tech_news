@@ -49,7 +49,10 @@ def search_by_date(date):
 
 # Requisito 8
 def search_by_tag(tag):
-    """Seu código deve vir aqui"""
+    regex = re.compile(tag, re.IGNORECASE)
+    results = search_news({"tags": regex})
+    response = [(news["title"], news["url"]) for news in results]
+    return response
 
 
 # Requisito 9
